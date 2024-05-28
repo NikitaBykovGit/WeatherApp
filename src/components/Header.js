@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 
-import "../styles/Header.css"
+import "../styles/Header.css";
+import Location from "./Location";
 
-class Header extends Component {
-  render() {
+function Header(props) {
     return (
-      <header>This is Header</header>
-    )
-  }
+    <header>
+      <div><h1>Weather Application</h1></div>
+      <Location location={props.location}/>
+    </header>
+  )
 }
 
 export default Header;

@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 
-import "../styles/Main.css"
+import "../styles/Main.css";
+import WeatherWindow from "./WeatherWindow";
 
-class Main extends Component {
-  render() {
-    return (
-      <main>This is Main</main>
-    )
-  }
+function Main(props) {
+  return (
+    <main>
+      <WeatherWindow forecast={props.forecast}/>
+    </main>
+  )
 }
 
 export default Main;
