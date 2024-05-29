@@ -13,14 +13,29 @@ function App() {
   const [location, setLocation] = useState(undefined);
   const [forecast, setForecast] = useState([]);
 
+  const changeLocation = (location) => {
+    axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${OpenWeatherAPI}`)
+      .then(res => {
+        console.log(res.data);
+        if (!res.data.length) {
+          alert('City does not exist! Enter correct value!')
+        } else {
+          setLocation(res.data[0].name);
+          changeCoords(res.data[0].lat, res.data[0].lon);
+        }
+      })
+  }
+
+  const changeCoords = (newLat, newLon) => {
+    let newCords = {lat: newLat, lon: newLon};
+    setСoords(newCords);
+  }
+
   if (!location) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        setСoords({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude
-        });
-        setLocation('Moscow');
+        changeCoords(position.coords.latitude, position.coords.longitude)
+        setLocation('default');
       });
     }
   }
@@ -35,7 +50,7 @@ function App() {
 
   return (
     <Fragment>
-      <Header location={location}/>
+      <Header location={location} changeLocation={changeLocation}/>
       <Main forecast={forecast}/>
       <Footer/>
     </Fragment>
