@@ -1,6 +1,6 @@
-.location-container {
+.interval-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   height: 30%;
 }

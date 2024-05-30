@@ -12,6 +12,7 @@ function App() {
   const [coords, setСoords] = useState({lat: 55.75, lon: 37.61});
   const [location, setLocation] = useState(undefined);
   const [forecast, setForecast] = useState([]);
+  const [interval, setInterval] = useState("1");
 
   const changeLocation = (location) => {
     axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${OpenWeatherAPI}`)
@@ -31,6 +32,10 @@ function App() {
     setСoords(newCords);
   }
 
+  const changeInterval = (value) => {
+    setInterval(value);
+  }
+
   if (!location) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -41,7 +46,7 @@ function App() {
   }
 
   useEffect(() => {
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&appid=${OpenWeatherAPI}&units=metric`)
+    axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&cnt=${40}&appid=${OpenWeatherAPI}&units=metric`)
       .then(res => {
         setLocation(res.data.city.name);
         setForecast(res.data.list);
@@ -50,8 +55,8 @@ function App() {
 
   return (
     <Fragment>
-      <Header location={location} changeLocation={changeLocation}/>
-      <Main forecast={forecast}/>
+      <Header location={location} changeLocation={changeLocation} changeInterval={changeInterval}/>
+      <Main forecast={forecast} interval={interval}/>
       <Footer/>
     </Fragment>
   )

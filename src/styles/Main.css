@@ -2,4 +2,5 @@ main {
   height: 85vh;
   background-color: #00BFFF;
   color: white;
+  overflow-y: auto;
 }

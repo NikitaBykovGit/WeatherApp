@@ -3,10 +3,10 @@ import React from "react";
 import "../styles/Main.css";
 import WeatherWindow from "./WeatherWindow";
 
-function Main(props) {
+function Main({forecast, interval}) {
   return (
     <main>
-      <WeatherWindow forecast={props.forecast}/>
+      <WeatherWindow forecast={forecast} interval={interval}/>
     </main>
   )
 }
