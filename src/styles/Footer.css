@@ -2,4 +2,7 @@ footer {
   height: 5vh;
   background-color: blue;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

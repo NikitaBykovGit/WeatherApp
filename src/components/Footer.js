@@ -4,7 +4,7 @@ import "../styles/Footer.css";
 
 function Footer() {
   return (
-    <footer>This is Footer</footer>
+    <footer>Weather Application, 2024</footer>
   )
 }
 

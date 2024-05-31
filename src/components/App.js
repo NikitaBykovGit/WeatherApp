@@ -14,17 +14,19 @@ function App() {
   const [forecast, setForecast] = useState([]);
   const [interval, setInterval] = useState("1");
 
-  const changeLocation = (location) => {
-    axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${OpenWeatherAPI}`)
-      .then(res => {
-        console.log(res.data);
-        if (!res.data.length) {
-          alert('City does not exist! Enter correct value!')
-        } else {
-          setLocation(res.data[0].name);
-          changeCoords(res.data[0].lat, res.data[0].lon);
-        }
-      })
+  const changeLocation = (value) => {
+    if (value) {
+      axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=1&appid=${OpenWeatherAPI}`)
+        .then(res => {
+          console.log(res.data);
+          if (!res.data.length) {
+            alert('City does not exist! Enter correct value!')
+          } else {
+            setLocation(res.data[0].name);
+            changeCoords(res.data[0].lat, res.data[0].lon);
+          }
+        })
+    }
   }
 
   const changeCoords = (newLat, newLon) => {
